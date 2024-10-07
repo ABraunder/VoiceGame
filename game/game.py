@@ -6,6 +6,7 @@ import speech_recognition as sr
 r = sr.Recognizer()
 import threading
 import queue
+from set_microphone import Microphone
 
 command_queue = queue.Queue()
 command_list = []
@@ -227,7 +228,7 @@ def start():
 def record():
     recognizer = sr.Recognizer()
     while True:
-        with sr.Microphone(device_index=2) as source:
+        with sr.Microphone(device_index=Microphone) as source:
             audio = recognizer.listen(source)
             try:
                 text = recognizer.recognize_google(audio, language="ru-RU")
